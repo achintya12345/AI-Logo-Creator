@@ -29,7 +29,7 @@ function CreateLogo(){
             step == 3 ? <LogoPalette onHandleInputChange={(v)=>onHandleInputChange('palette', v)} formData={formData}/> : 
             step == 4 ? <LogoDesigns onHandleInputChange={(v)=>onHandleInputChange('design', v)} formData={formData}/> :
             step == 5 ? <LogoIdea onHandleInputChange={(v)=>onHandleInputChange('idea', v)} formData={formData}/> :
-            step == 6 ? <PricingModel onHandleInputChange={(v)=>onHandleInputChange('pricing', v)} formData={formData}/> :
+            step == 6 ? <Suspense fallback={<div>Loading...</div>}><PricingModel onHandleInputChange={(v)=>onHandleInputChange('pricing', v)} formData={formData}/></Suspense> :
             null}
 
             <div className='flex items-center justify-between mt-10'>
