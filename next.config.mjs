@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+export default {
+    experimental: {
+      serverActions: true,
+    },
+    api: {
+      bodyParser: false,
+      externalResolver: true,
+      timeout: 600,  // Global timeout setting
+    },
+  };
+  

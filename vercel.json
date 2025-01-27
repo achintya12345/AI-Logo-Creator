@@ -1,7 +1,0 @@
-{
-    "functions": {
-      "api/ai-logo-model/route.tsx": {
-        "timeout": 600
-      }
-    }
-  }
