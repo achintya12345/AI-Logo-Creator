@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useState, Suspense } from 'react'
 
 import LogoTitle from './_components/LogoTitle';
 import { Button } from '@/components/ui/button';
@@ -24,7 +24,7 @@ function CreateLogo(){
 
     return(
         <div className='mt-28 p-10 border rounded-xl 2xl:mx-72'>
-            {step == 1 ? <LogoTitle onHandleInputChange={(v)=>onHandleInputChange('title', v)} formData={formData}/> : 
+            {step == 1 ? <Suspense fallback={<div>Loading...</div>}><LogoTitle onHandleInputChange={(v)=>onHandleInputChange('title', v)} formData={formData}/></Suspense> : 
             step == 2 ? <LogoDesc onHandleInputChange={(v)=>onHandleInputChange('desc', v)} formData={formData}/> : 
             step == 3 ? <LogoPalette onHandleInputChange={(v)=>onHandleInputChange('palette', v)} formData={formData}/> : 
             step == 4 ? <LogoDesigns onHandleInputChange={(v)=>onHandleInputChange('design', v)} formData={formData}/> :
