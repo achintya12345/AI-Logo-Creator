@@ -23,6 +23,7 @@ export async function POST(req){
 
         //Generate logo From AI Modal
         if(type=='Free'){
+            console.log("Free API was called")
             const response = await axios.post("https://api-inference.huggingface.co/models/strangerzonehf/Flux-Midjourney-Mix2-LoRA",
                 AiPrompt,
                 {
@@ -33,7 +34,7 @@ export async function POST(req){
                     responseType: "arraybuffer"
                 }
             )
-
+            console.log("Free API was called and response: ", response)
             //Convert to base 64 image
             const buffer = Buffer.from(response.data, "binary");
             const base64Image = buffer.toString("base64");

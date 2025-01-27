@@ -28,7 +28,7 @@ function LogoIdea({formData,onHandleInputChange}) {
       prompt:PROMPT
     })
 
-    const ideasBoi = result.data.map(item => Object.values(item)[0]);
+    const ideasBoi =  result[0]?.suggestions ? result[0]?.suggestions : result.data.map(item => Object.values(item)[0]);
 
    !ideas && setIdeas(ideasBoi);
     setLoading(false);
