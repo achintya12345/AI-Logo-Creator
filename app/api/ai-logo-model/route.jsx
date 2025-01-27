@@ -6,24 +6,24 @@ import Replicate from "replicate";
 import { doc, setDoc } from "firebase/firestore"
 
 export async function POST(req){
-
+    console.log("Inside the route")
     const {prompt, email, title, desc, type, userCredits} = await req.json();
 
     let base64ImageWithMime = '';
     const replicate = new Replicate({
         auth: process.env.REPLICATE_API_TOKEN,
     });
-
+    console.log("First Stage")
     try{
-
+        console.log("Second Stage")
         //Generate AI Text prompt for logo
         const AiPromptResult = await AILogoPrompt.sendMessage(prompt);
 
         const AiPrompt = JSON.parse(AiPromptResult.response.text()).prompt;
-
+        console.log("Third Stage")
         //Generate logo From AI Modal
         if(type=='Free'){
-            console.log("Free API was called")
+            console.log("Fourth Stage")
             const response = await axios.post("https://api-inference.huggingface.co/models/strangerzonehf/Flux-Midjourney-Mix2-LoRA",
                 AiPrompt,
                 {
@@ -34,14 +34,14 @@ export async function POST(req){
                     responseType: "arraybuffer"
                 }
             )
-            console.log("Free API was called and response: ", response)
+
             //Convert to base 64 image
             const buffer = Buffer.from(response.data, "binary");
             const base64Image = buffer.toString("base64");
             base64ImageWithMime = `data:image/png;base64,${base64Image}`;
-
+            console.log("Fifth Stage")
         } else {
-            console.log("Replicate API Called")
+
             //Replicate API EndPoint
             const output = await replicate.run(
                 "bytedance/hyper-flux-8step:81946b1e09b256c543b35f37333a30d0d02ee2cd8c4f77cd915873a1ca622bad",
@@ -57,7 +57,7 @@ export async function POST(req){
                   }
                 }
             );
-            console.log("Jesus is the way: ",output);
+
             base64ImageWithMime = await ConvetImageToBase64(output);
 
             const docRef = doc(db, 'users', email)
@@ -68,7 +68,7 @@ export async function POST(req){
 
         //Save to firebase database
         try{
-            console.log("Saved in database: ", email)
+            console.log("Sixth Stage")
             await setDoc(doc(db, "users", email, "logos", Date.now().toString()),{
                 image: base64ImageWithMime, 
                 title: title,
@@ -81,6 +81,7 @@ export async function POST(req){
 
         return NextResponse.json({image: base64ImageWithMime});
     }catch(e){
+        console.log("Error Stage: ", e)
         return NextResponse.json({error:e})
     }
 }

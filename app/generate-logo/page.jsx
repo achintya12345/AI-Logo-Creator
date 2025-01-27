@@ -40,7 +40,6 @@ function GenerateLogo(){
     const GenerateAILogo = async() => {
 
         if(modelType!='Free'){ // userDetail?.credits <= 0
-            console.log("Not enough credits")
             toast('Currently not available, please use free option')
             return;
         }

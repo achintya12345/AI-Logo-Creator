@@ -23,7 +23,7 @@ function CreateLogo(){
     }
 
     return(
-        <div className='mt-28 p-10 border rounded-xl 2xl:mx-72'>
+        <div className='mt-28 lg:w-[1000px] xl:w-[1000px] p-10 border rounded-xl 2xl:mb-52'>
             {step == 1 ? <Suspense fallback={<div>Loading...</div>}><LogoTitle onHandleInputChange={(v)=>onHandleInputChange('title', v)} formData={formData}/></Suspense> : 
             step == 2 ? <LogoDesc onHandleInputChange={(v)=>onHandleInputChange('desc', v)} formData={formData}/> : 
             step == 3 ? <LogoPalette onHandleInputChange={(v)=>onHandleInputChange('palette', v)} formData={formData}/> : 

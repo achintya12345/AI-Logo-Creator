@@ -16,14 +16,12 @@ function LogoList(){
 
     const GetUsersLogo = async() => {
         const querySnapshot = await getDocs(collection(db, "users", userDetail?.email, "logos"))
-        console.log("querySnapshot: ", querySnapshot)
+
         setLogoList([]);
         querySnapshot.forEach((doc)=>{
             setLogoList(prev=>[...prev, doc.data()])
         });
     }
-    console.log('userDetail?.email: ', userDetail?.email)
-    console.log('logoList: ', logoList)
 
     const ViewLogo = (image) => {
         const imageWindow =  window.open();

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 import HeadingDescription from './HeadingDescription'
 import Lookup from '@/app/_data/Lookup'
@@ -28,8 +29,10 @@ function LogoIdea({formData,onHandleInputChange}) {
       prompt:PROMPT
     })
 
-    const ideasBoi =  result[0]?.suggestions ? result[0]?.suggestions : result.data.map(item => Object.values(item)[0]);
-    console.log("ideasBoi: ", ideasBoi);
+    const ideasBoi =  result[0]?.suggestions ? result[0]?.suggestions : 
+                      result[0]?.logo_ideas ? result[0]?.logo_ideas : 
+                      result.data.map(item => Object.values(item)[0]);
+
    !ideas && setIdeas(ideasBoi);
     setLoading(false);
   }
