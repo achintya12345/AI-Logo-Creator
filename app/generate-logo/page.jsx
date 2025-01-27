@@ -16,8 +16,11 @@ function GenerateLogo(){
     const [formData, setFormData] = useState();
     const [loading, setLoading] = useState(false); 
     const [logoImage, setLogoImage] = useState();
-    const searchParams = useSearchParams();
-    const modelType = searchParams.get('type');
+
+    // const searchParams = useSearchParams();
+    // const modelType = searchParams.get('type');
+
+    const modelType = 'Free';
 
     useEffect(()=>{
         if(typeof window != 'undefined' && userDetail?.email){
